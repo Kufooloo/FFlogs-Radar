@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Please input your FFXIV character name, home data cetner and world</h1>
+    <input
+      autocorrect="off"
+      type="text"
+      id="name"
+      placeholder="First and Last Name"
+      form="fflogs"
+    />
+    <select id="dataCenter" onchange="updateWorld()" form="fflogs">
+      <option value="" disabled selected>Select a data center</option>
+      <option value="Aether">Aether</option>
+      <option value="Primal">Primal</option>
+      <option value="Crystal">Crystal</option>
+      <option value="Dynamis">Dynamis</option>
+    </select>
+    <select id="world" form="fflogs">
+      <option value="" disabled selected>Please select a world</option>
+    </select>
+    <button type="button" onclick="generateGraphs()">Submit</button>
+  </body>
+
+  <script>
+    var worlds = {
+      Aether: [
+        "Adamantoise",
+        "Cactuar",
+        "Faerie",
+        "Gilgamesh",
+        "Jenova",
+        "Midgardsormr",
+        "Sargatanas",
+        "Siren",
+      ],
+      Primal: [
+        "Behemoth",
+        "Excalibur",
+        "Exodus",
+        "Famfrit",
+        "Hyperion",
+        "Lamia",
+        "Leviathan",
+        "Ultros",
+      ],
+      Crystal: [
+        "Balmung",
+        "Brynhildr",
+        "Coeurl",
+        "Diabolos",
+        "Goblin",
+        "Malboro",
+        "Mateus",
+        "Zalera",
+      ],
+      Dynamis: ["Halicarnassus", "Maduin", "Marilith", "Seraph"],
+    };
+    function returnFFlogsData(name, server)
+    {
+        
+    }
+    function generateGraphs()
+    {
+        var name = document.getElementById("name").value;
+        var server = document.getElementById('world').value;
+        var data_dict = returnFFlogsData(name, server)
+    }
+    function updateWorld() {
+      var selectValue = document.getElementById("dataCenter").value;
+      var world = document.getElementById("world");
+      for (i in world.options) {
+        world.options.remove(0);
+      }
+
+      for (i = 0; i < worlds[selectValue].length; i++) {
+        var opt = document.createElement("option");
+        opt.value = worlds[selectValue][i];
+        opt.innerHTML = opt.value;
+        world.appendChild(opt);
+      }
+    }
+  </script>
+</html>
